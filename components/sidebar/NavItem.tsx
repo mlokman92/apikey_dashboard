@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { NavItem } from '@/types/dashboard';
+import type { NavItem } from '@/types/dashboard';
 
 interface Props {
   item: NavItem;
