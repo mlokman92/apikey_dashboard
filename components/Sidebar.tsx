@@ -20,7 +20,7 @@ const navItems = [
   { name: 'Overview', href: '/dashboards', icon: HomeIcon },
   { name: 'Research Assistant', href: '/research-assistant', icon: SparklesIcon },
   { name: 'Research Reports', href: '/research-reports', icon: DocumentTextIcon },
-  { name: 'API Playground', href: '/api-playground', icon: CodeBracketIcon },
+  { name: 'API Playground', href: '/dashboards/playground', icon: CodeBracketIcon },
   { name: 'Invoices', href: '/invoices', icon: DocumentDuplicateIcon },
   { name: 'Documentation', href: '/documentation', icon: BookOpenIcon },
 ];

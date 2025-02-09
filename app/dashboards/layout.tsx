@@ -3,6 +3,7 @@
 import { SidebarProvider } from '@/context/SidebarContext';
 import Sidebar from '@/components/Sidebar';
 import { useSidebar } from '@/context/SidebarContext';
+import { Toaster } from 'react-hot-toast';
 
 function DashboardContent({ children }: { children: React.ReactNode }) {
   const { isCollapsed } = useSidebar();
@@ -17,6 +18,7 @@ function DashboardContent({ children }: { children: React.ReactNode }) {
       >
         {children}
       </main>
+      <Toaster />
     </div>
   );
 }
