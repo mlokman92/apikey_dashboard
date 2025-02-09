@@ -30,7 +30,6 @@ interface EditKeyForm {
 
 export default function DashboardPage() {
   const [apiKeys, setApiKeys] = useState<ApiKey[]>([]);
-  const [newKeyName, setNewKeyName] = useState('');
   const [copySuccess, setCopySuccess] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
   const [showKey, setShowKey] = useState<string | null>(null);
@@ -85,7 +84,7 @@ export default function DashboardPage() {
         has_monthly_limit: createKeyForm.hasMonthlyLimit,
       };
 
-      const { data, error } = await supabase
+      const { error } = await supabase
         .from('api_keys')
         .insert([newKey])
         .select()
