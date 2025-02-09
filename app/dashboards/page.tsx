@@ -13,7 +13,7 @@ interface ApiKey {
   created_at: string;
   usage: number;
   max_usage: number;
-  monthly_limit?: number;
+  monthly_limit: number | null;
   has_monthly_limit: boolean;
 }
 
@@ -288,6 +288,15 @@ export default function DashboardPage() {
     }
   };
 
+  const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (editingKeyData) {
+      setEditingKeyData({
+        ...editingKeyData,
+        name: e.target.value
+      });
+    }
+  };
+
   return (
     <div className="min-h-screen p-8 max-w-6xl mx-auto">
       <Toaster />
@@ -351,7 +360,7 @@ export default function DashboardPage() {
                         <input
                           type="text"
                           value={editingKeyData.name}
-                          onChange={(e) => setEditingKeyData(prev => ({ ...prev, name: e.target.value }))}
+                          onChange={handleNameChange}
                           className="px-2 py-1 border rounded w-full max-w-[200px]"
                         />
                         <button
