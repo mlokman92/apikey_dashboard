@@ -1,8 +1,8 @@
 import { UserCircleIcon, Cog6ToothIcon } from '@heroicons/react/24/outline';
-import { UserProfile } from '@/types/dashboard';
+import type { UserProfile as UserProfileType } from '@/types/dashboard';
 
 interface Props {
-  user: UserProfile;
+  user: UserProfileType;
   onSettingsClick: () => void;
 }
 
