@@ -1,9 +1,12 @@
-import { IconType } from '@heroicons/react/24/outline';
+import type { ComponentType } from 'react';
+import type { SVGProps } from 'react';
+
+export type HeroIcon = ComponentType<SVGProps<SVGSVGElement>>;
 
 export interface NavItem {
   name: string;
   href: string;
-  icon: IconType;
+  icon: HeroIcon;
 }
 
 export interface UserProfile {
