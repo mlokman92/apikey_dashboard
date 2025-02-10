@@ -15,10 +15,17 @@ export async function POST(request: Request) {
   }
 
   try {
-    const { apikey } = await request.json();
+    const body = await request.json();
+    console.log('Request body:', body); // Debug log
+
+    const { apikey } = body;
+    console.log('API Key:', apikey); // Debug log
 
     if (!apikey) {
-      return NextResponse.json({ message: "Invalid API key" }, { 
+      return NextResponse.json({ 
+        message: "Invalid API key",
+        debug: "No API key provided" 
+      }, { 
         status: 400,
         headers: {
           'Access-Control-Allow-Origin': '*',
@@ -32,8 +39,13 @@ export async function POST(request: Request) {
       .eq('key', apikey)
       .single();
 
+    console.log('Supabase response:', { data, error }); // Debug log
+
     if (error?.code === 'PGRST116' || !data) {
-      return NextResponse.json({ message: "Invalid API key" }, { 
+      return NextResponse.json({ 
+        message: "Invalid API key",
+        debug: error ? error.message : "No data found" 
+      }, { 
         status: 401,
         headers: {
           'Access-Control-Allow-Origin': '*',
@@ -66,7 +78,11 @@ export async function POST(request: Request) {
     });
 
   } catch (error) {
-    return NextResponse.json({ message: "Invalid API key" }, { 
+    console.error('Error:', error); // Debug log
+    return NextResponse.json({ 
+      message: "Invalid API key",
+      debug: error instanceof Error ? error.message : "Unknown error"
+    }, { 
       status: 500,
       headers: {
         'Access-Control-Allow-Origin': '*',

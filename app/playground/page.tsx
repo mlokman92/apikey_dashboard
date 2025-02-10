@@ -21,7 +21,9 @@ export default function PlaygroundPage() {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ apiKey }),
+        body: JSON.stringify({
+          apikey: apiKey
+        }),
       });
 
       const data = await response.json();
