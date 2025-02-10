@@ -16,6 +16,10 @@ const nextConfig = {
           { key: "Access-Control-Allow-Methods", value: "GET,OPTIONS,PATCH,DELETE,POST,PUT" },
           { key: "Access-Control-Allow-Headers", value: "*" },
           { key: "Referrer-Policy", value: "no-referrer" },
+          // Add security headers to bypass auth
+          { key: "X-Frame-Options", value: "DENY" },
+          { key: "X-Content-Type-Options", value: "nosniff" },
+          { key: "Permissions-Policy", value: "camera=(), microphone=(), geolocation=()" },
         ]
       }
     ]

@@ -6,16 +6,23 @@ function corsHeaders() {
   return {
     'Access-Control-Allow-Origin': '*',
     'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
-    'Access-Control-Allow-Headers': 'Content-Type, Authorization, X-Requested-With',
+    'Access-Control-Allow-Headers': '*',
+    'Access-Control-Allow-Credentials': 'true',
     'Referrer-Policy': 'no-referrer',  // Make it public by removing referrer restrictions
   };
 }
 
 export async function OPTIONS() {
-  return NextResponse.json({}, { headers: corsHeaders() });
+  return new NextResponse(null, {
+    status: 200,
+    headers: corsHeaders(),
+  });
 }
 
 export async function POST(request: Request) {
+  // Always add CORS headers
+  const headers = corsHeaders();
+
   try {
     const body = await request.json();
     console.log('Request body:', body);
@@ -29,7 +36,7 @@ export async function POST(request: Request) {
         debug: "No API key provided" 
       }, { 
         status: 400,
-        headers: corsHeaders()
+        headers
       });
     }
 
@@ -47,7 +54,7 @@ export async function POST(request: Request) {
         debug: error ? error.message : "No data found" 
       }, { 
         status: 401,
-        headers: corsHeaders()
+        headers
       });
     }
 
@@ -58,7 +65,7 @@ export async function POST(request: Request) {
         message: "API key has exceeded maximum usage limit" 
       }, { 
         status: 403,
-        headers: corsHeaders()
+        headers
       });
     }
 
@@ -68,7 +75,7 @@ export async function POST(request: Request) {
         message: "API key has exceeded monthly usage limit" 
       }, { 
         status: 403,
-        headers: corsHeaders()
+        headers
       });
     }
 
@@ -80,7 +87,7 @@ export async function POST(request: Request) {
         is_monthly_limit_enabled: data.has_monthly_limit
       }
     }, {
-      headers: corsHeaders()
+      headers
     });
 
   } catch (error) {
@@ -90,7 +97,7 @@ export async function POST(request: Request) {
       debug: error instanceof Error ? error.message : "Unknown error"
     }, { 
       status: 500,
-      headers: corsHeaders()
+      headers
     });
   }
 } 
